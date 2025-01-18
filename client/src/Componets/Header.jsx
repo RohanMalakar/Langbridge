@@ -2,19 +2,16 @@ import React, { useState } from "react";
 import { IoMenu, IoHome } from "react-icons/io5";
 import { ImCross } from "react-icons/im";
 import { Link } from "react-router-dom";
-import { BsChatRightDots } from "react-icons/bs";
+import { MdLanguage } from "react-icons/md";
 import { RiTeamFill } from "react-icons/ri";
 import { FaGithub } from "react-icons/fa";
 import logo from "../assets/Images/logo.gif";
+import { GrYoutube } from "react-icons/gr";
 
-
-function Header({hideChatBot,setHideChatBot}) {
+function Header() {
   const [menuOpen, setMenuOpen] = useState(false);
 
-  //setHideChatBot
-  const handleChatBotHide =  ()=>{
-    setHideChatBot(()=>!hideChatBot);
-  }
+
   return (
     <header className="sticky top-0 w-full text-white bg-gray-900 z-50 shadow-md border-b-1">
 
@@ -23,7 +20,7 @@ function Header({hideChatBot,setHideChatBot}) {
         {/* Logo */}
         <div className="flex items-center space-x-4 py-3">
           <Link to="/" className="font-serif text-[1.3rem] font-[900] text-indigo-500 hover:text-indigo-600">
-          Insightify
+            Insightify
           </Link>
         </div>
 
@@ -33,7 +30,7 @@ function Header({hideChatBot,setHideChatBot}) {
             onClick={() => setMenuOpen(!menuOpen)}
             className="text-[1.7rem] text-indigo-500 focus:outline-none"
           >
-            {menuOpen ? <ImCross className="text-[.8rem] mb-[2px] mr-2"/> : <IoMenu />}
+            {menuOpen ? <ImCross className="text-[.8rem] mb-[2px] mr-2" /> : <IoMenu />}
           </button>
         </div>
 
@@ -45,19 +42,23 @@ function Header({hideChatBot,setHideChatBot}) {
               <span className="text-medium font-semibold group-hover:text-indigo-300">Home</span>
             </Link>
           </li>
-          <li>
-            <div className="flex items-center gap-2 group flex justify-center items-center cursor-pointer"
-             onClick={handleChatBotHide}>
-              <BsChatRightDots className="text-[1.3rem] text-indigo-500 group-hover:text-indigo-300" />
-              <span className="text-medium font-semibold group-hover:text-indigo-300">Chat</span>
-            </div>
-          </li>
+
+          <Link to={'/translator'}>
+            <li>
+              <div className="flex items-center gap-2 group flex justify-center items-center cursor-pointer"
+              >
+                <MdLanguage className="text-[1.3rem] text-indigo-500 group-hover:text-indigo-300" />
+                <span className="text-medium font-semibold group-hover:text-indigo-300">Tranlator</span>
+              </div>
+            </li>
+          </Link>
           <li>
             <Link className="flex items-center gap-2 group group" to="/ourteam">
               <RiTeamFill className="text-[1.5rem] text-indigo-500 group-hover:text-indigo-300" />
               <span className="text-medium font-semibold group-hover:text-indigo-300">Our Team</span>
             </Link>
           </li>
+           {/*  ----------- Github -----------  */}
           <li
             onClick={() => {
               window.open("https://github.com/RohanMalakar/Insightify2", "_blank");
@@ -66,6 +67,17 @@ function Header({hideChatBot,setHideChatBot}) {
             <Link className="flex items-center gap-2 group">
               <FaGithub className="text-[1.5rem] text-indigo-500 group-hover:indigo-500" />
               <span className="text-medium font-semibold group-hover:text-indigo-300">Github</span>
+            </Link>
+          </li>
+          {/*  ----------- Youtube -----------  */}
+          <li
+            onClick={() => {
+              window.open("https://github.com/RohanMalakar/Insightify2", "_blank");
+            }}
+          >
+            <Link className="flex items-center gap-2 group">
+              <GrYoutube className="text-[1.5rem] text-indigo-500 group-hover:indigo-500" />
+              <span className="text-medium font-semibold group-hover:text-indigo-300">Youtube</span>
             </Link>
           </li>
         </ul>
@@ -81,23 +93,23 @@ function Header({hideChatBot,setHideChatBot}) {
                 to="/"
                 onClick={() => setMenuOpen(false)}
               >
-               <IoHome className="text-[1.5rem] text-indigo-500 group-hover:text-indigo-300" />
-              <span className="text-medium font-semibold group-hover:text-indigo-300">Home</span>
-           </Link>
+                <IoHome className="text-[1.5rem] text-indigo-500 group-hover:text-indigo-300" />
+                <span className="text-medium font-semibold group-hover:text-indigo-300">Home</span>
+              </Link>
             </li>
 
-            <li className="hover:bg-gray-600 rounded p-2 pl-3"
-             onClick={handleChatBotHide}>
-              <div
-                className="flex items-center gap-2"
-                to="/chat"
-                onClick={() =>{setMenuOpen(false)}}
-              >
-                 <BsChatRightDots className="text-[1.5rem] text-indigo-500 group-hover:text-indigo-300" />
-              <span className="text-medium font-semibold group-hover:text-indigo-300">Chat</span>
-         
-              </div>
-            </li>
+            <Link to={'/translator'}>
+              <li className="hover:bg-gray-600 rounded p-2 pl-3">
+                <div
+                  className="flex items-center gap-2"
+                  to="/chat"
+                  onClick={() => { setMenuOpen(false) }}
+                >
+                  <MdLanguage className="text-[1.5rem] text-indigo-500 group-hover:text-indigo-300" />
+                  <span className="text-medium font-semibold group-hover:text-indigo-300">Language</span>
+                </div>
+              </li>
+            </Link>
             <li className="hover:bg-gray-600 rounded p-2 pl-3">
               <Link
                 className="flex items-center gap-2"
@@ -105,22 +117,36 @@ function Header({hideChatBot,setHideChatBot}) {
                 onClick={() => setMenuOpen(false)}
               >
                 <RiTeamFill className="text-[1.5rem] text-indigo-500 group-hover:text-indigo-300" />
-              <span className="text-medium font-semibold group-hover:text-indigo-300">Our team</span>
-         
+                <span className="text-medium font-semibold group-hover:text-indigo-300">Our team</span>
+
               </Link>
             </li>
             <li
-            className="hover:bg-gray-600 rounded p-2 pl-3"
+              className="hover:bg-gray-600 rounded p-2 pl-3"
               onClick={() => {
                 window.open("https://github.com/RohanMalakar/Insightify2", "_blank");
                 setMenuOpen(false);
               }}
             >
               <Link className="flex items-center gap-2">
-              <FaGithub className="text-[1.5rem] text-indigo-500 group-hover:indigo-500" />
-              <span className="text-medium font-semibold group-hover:text-indigo-300">Github</span>
+                <FaGithub className="text-[1.5rem] text-indigo-500 group-hover:indigo-500" />
+                <span className="text-medium font-semibold group-hover:text-indigo-300">Github</span>
               </Link>
             </li>
+            {/*----------------- Youtube ----------------- */}
+            <li
+              className="hover:bg-gray-600 rounded p-2 pl-3"
+              onClick={() => {
+                window.open("https://github.com/RohanMalakar/Insightify2", "_blank");
+                setMenuOpen(false);
+              }}
+            >
+              <Link className="flex items-center gap-2">
+                <GrYoutube className="text-[1.5rem] text-indigo-500 group-hover:indigo-500" />
+                <span className="text-medium font-semibold group-hover:text-indigo-300">Youtube</span>
+              </Link>
+            </li>
+
           </ul>
         </div>
       )}

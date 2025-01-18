@@ -15,9 +15,8 @@ function App() {
 
     return (
         <>
-            <Header hideChatBot={hideChatBot} setHideChatBot={setHideChatBot} />
+            <Header  />
             {/* ChatBox */}
-            <ChatBox  hideChatBot={hideChatBot} setHideChatBot={setHideChatBot}/>
             <Outlet  />
             <Footer />
         </>

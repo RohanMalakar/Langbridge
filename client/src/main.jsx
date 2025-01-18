@@ -8,6 +8,7 @@ import NotFoundPage from './Pages/NotFoundPage.jsx'
 import Home from './Componets/Home.jsx'
 import { StrictMode } from 'react'
 import Dashboard from "./Pages/Dashboard.jsx";
+import Translator from './Componets/ChatBotComp/Translator.jsx'
 
 const router = createBrowserRouter([
   {
@@ -16,7 +17,8 @@ const router = createBrowserRouter([
     children: [
       { path: '/', element: <Home /> },
       { path: '/ourteam', element: <OurActualteam /> },
-      { path: '/dashboard', element: <Dashboard /> },
+      { path: '/dashboard', element: <Dashboard /> },,
+      { path: '/translator', element: <Translator /> },
       { path: '*', element: <NotFoundPage /> }
     ]
   }
