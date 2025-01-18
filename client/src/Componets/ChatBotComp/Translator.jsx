@@ -1,12 +1,14 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import { FaLanguage, FaExchangeAlt, FaCopy } from "react-icons/fa";
 import { IoMdClose } from "react-icons/io";
+import sendInput from "../../operations/sendInput";
+import { MdAddLink } from "react-icons/md";
+import { useForm } from 'react-hook-form';
 
 const Translator = () => {
-  const [sourceLanguage, setSourceLanguage] = useState("en");
   const [targetLanguage, setTargetLanguage] = useState("es");
-  const [inputText, setInputText] = useState("");
-  const [translatedText, setTranslatedText] = useState("");
+  const [res, setRes] = useState(null);
+  let inputText = useRef("");
   const [isCopied, setIsCopied] = useState(false);
 
   const fromLanguages = [{ code: "en", name: "English" }]
@@ -23,18 +25,16 @@ const Translator = () => {
   ];
 
   const handleTranslate = () => {
-    if (!inputText.trim()) {
-      setTranslatedText("");
+    let langData = inputText.current.value.trim();
+    if (langData !== '') {
+      console.log(langData)
+      // const response = sendInput(langData);
+      setRes(langData);
+    } else {
       return;
     }
-    setTranslatedText(`${inputText} (Translated to ${languages.find(lang => lang.code === targetLanguage)?.name})`)
   };
 
-  const handleSwapLanguages = () => {
-    setSourceLanguage(targetLanguage);
-    setTargetLanguage(sourceLanguage);
-    setTranslatedText("");
-  };
 
   const handleCopyText = (text) => {
     navigator.clipboard.writeText(text);
@@ -43,99 +43,119 @@ const Translator = () => {
   };
 
   const handleClearText = () => {
-    setInputText("");
-    setTranslatedText("");
+    inputText.current.value = '';
+    setRes("");
   };
 
-  return (
-    <div className="min-h-screen bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
-      <div className="max-w-4xl mx-auto">
-        <div className="text-center mb-8">
-          <FaLanguage className="mx-auto h-12 w-12 text-blue-500" />
-          <h2 className="mt-2 text-3xl font-bold text-gray-900">Language Translator</h2>
-          <p className="mt-2 text-gray-600">Translate text between multiple languages instantly</p>
-        </div>
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
 
-        <div className="bg-white rounded-lg shadow-lg p-6">
-          <div className="flex flex-col sm:flex-row items-center justify-between gap-4 mb-6">
-            <select
-              value={sourceLanguage}
-              onChange={(e) => setSourceLanguage(e.target.value)}
-              className="w-full sm:w-1/3 p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-            >
-              {fromLanguages.map((lang) => (
-                <option key={lang.code} value={lang.code}>
-                  {lang.name}
-                </option>
-              ))}
-            </select>
+  //Submit login form
+  const onSubmit = async (data) => {
+    if(data.textData!==''){
+      const response = sendInput(data.textData);
+      setRes(response)
+    }else{
+      return ;
+    }
+  }
+    return ( 
+      <div className="min-h-screen bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
+        <div className="max-w-4xl mx-auto">
 
-            <button
-              onClick={handleSwapLanguages}
-              className="p-2 rounded-full hover:bg-gray-100 transition-colors"
-            >
-              <FaExchangeAlt className="h-6 w-6 text-blue-500" />
-            </button>
-
-            <select
-              value={targetLanguage}
-              onChange={(e) => setTargetLanguage(e.target.value)}
-              className="w-full sm:w-1/3 p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-            >
-              {toLanguages.map((lang) => (
-                <option key={lang.code} value={lang.code}>
-                  {lang.name}
-                </option>
-              ))}
-            </select>
+          {/* Section 1 */}
+          <div className="text-center mb-8">
+            <FaLanguage className="mx-auto h-12 w-12 text-blue-500" />
+            <h2 className="mt-2 text-3xl font-bold text-gray-900">Language Translator</h2>
+            <p className="mt-2 text-gray-600">Translate text between multiple languages instantly</p>
           </div>
 
-          <div className="relative mb-6">
-            <textarea
-              value={inputText}
-              onChange={(e) => setInputText(e.target.value)}
-              placeholder="Enter text to translate..."
-              className="w-full h-40 p-4 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 resize-none"
-            />
-            {inputText && (
-              <button
-                onClick={handleClearText}
-                className="absolute top-2 right-2 p-2 rounded-full hover:bg-gray-100 transition-colors"
-              >
-                <IoMdClose className="h-5 w-5 text-gray-500" />
-              </button>
-            )}
+          {/*----------- Section -2  ----------- */}
+          <div className="bg-white rounded-lg shadow-lg p-6">
+
+
+            {/* form */}
+            <form className="" onSubmit={handleSubmit(onSubmit)}>
+
+              <div className="flex flex-col sm:flex-row items-center justify-between gap-4 mb-6">
+
+                {/* //Select lanuage to tranlate */}
+                <select
+                  name="targetLang"
+                  className="w-full sm:w-1/3 p-3 border border-gray-300 rounded-lg focus:ring-2"
+                  {...register("targetLang", { required: true })}
+                >
+                  <option value="">Select language</option>
+                  {toLanguages.map((lang) => (
+                    <option key={lang.code} value={lang.code}>
+                      {lang.name}
+                    </option>
+                  ))}
+                </select>
+              </div>
+
+              {/* Input from */}
+              <div className="border-2 h-45 p-2 rounded-lg border-gray-800">
+                <textarea
+                  placeholder="Enter text to translate..."
+                  name="textData"
+
+                  className="w-full h-30 p-3 focus:ring-0 focus:outline-none"
+                  {...register("textData")}
+                />
+
+                {/* Link Icon (PDF or Video) */}
+                <div className="w-full flex items-center justify-between px-2">
+
+                  <div className="">
+                    <label
+                      htmlFor="file-upload"
+                      className="text-blue-600 hover:text-blue-800 cursor-pointer flex items-center space-x-2"
+                    >
+                      {/* Example: PDF Icon (you can replace with any icon library like FontAwesome or Heroicons) */}
+                      <MdAddLink className="text-[1.5rem]" />
+                    </label>
+
+                    {/* Hidden file input */}
+                    <input
+                      id="file-upload"
+                      type="file"
+                      accept=".pdf,video/*"
+                      className="hidden"
+                      name="fileData"
+                      {...register("fileData")}
+                    />
+                  </div>
+
+                  <div>
+                    <button type="submit" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">Translate</button>
+                  </div>
+
+                </div>
+              </div>
+
+            </form>
+
+
+            {/* Output from */}
+            {res !== null ?
+              <textarea
+                value={res}
+                placeholder=" translate..."
+                className="w-full h-40 p-4 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 resize-none"
+              /> :
+              null}
+
           </div>
+          {/* Section -2 end--------- */}
 
-          <button
-            onClick={handleTranslate}
-            disabled={!inputText.trim()}
-            className="w-full py-3 px-4 border border-transparent rounded-lg shadow-sm text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 disabled:opacity-50 disabled:cursor-not-allowed mb-6"
-          >
-            Translate
-          </button>
 
-          {translatedText && (
-            <div className="relative p-4 border border-gray-300 rounded-lg bg-gray-50">
-              <p className="text-gray-900 mb-2">{translatedText}</p>
-              <button
-                onClick={() => handleCopyText(translatedText)}
-                className="absolute top-2 right-2 p-2 rounded-full hover:bg-gray-200 transition-colors"
-                title="Copy to clipboard"
-              >
-                <FaCopy className="h-5 w-5 text-gray-500" />
-              </button>
-              {isCopied && (
-                <span className="absolute bottom-2 right-2 text-sm text-green-600">
-                  Copied!
-                </span>
-              )}
-            </div>
-          )}
         </div>
       </div>
-    </div>
-  );
-};
+    );
+  };
 
-export default Translator;
+  export default Translator;
