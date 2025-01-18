@@ -27,7 +27,7 @@ const Translator = () => {
       setTranslatedText("");
       return;
     }
-    setTranslatedText(`${inputText} (Translated to ${languages.find(lang => lang.code === targetLanguage)?.name})`)
+    setTranslatedText(`${inputText} \n Language:${toLanguages.find(lang => lang.code === targetLanguage)?.name})`)
   };
 
   const handleSwapLanguages = () => {
