@@ -8,7 +8,7 @@ import { useForm } from 'react-hook-form';
 const Translator = () => {
   const [targetLanguage, setTargetLanguage] = useState("es");
   const [res, setRes] = useState(null);
-  let inputText = useRef("");
+  let [inputText,setInputText] = useState("")
   const [isCopied, setIsCopied] = useState(false);
 
   const fromLanguages = [{ code: "en", name: "English" }]
@@ -26,7 +26,7 @@ const Translator = () => {
 ];
 
   const handleTranslate = () => {
-    let langData = inputText.current.value.trim();
+    let langData = inputText.trim();
     if (langData !== '') {
       console.log(langData)
       // const response = sendInput(langData);
@@ -34,7 +34,7 @@ const Translator = () => {
     } else {
       return;
     }
-    setTranslatedText(`${inputText} \n Language:${toLanguages.find(lang => lang.code === targetLanguage)?.name})`)
+   
   };
 
 
@@ -45,7 +45,6 @@ const Translator = () => {
   };
 
   const handleClearText = () => {
-    inputText.current?.value = '';
     setRes("");
   };
 
@@ -58,7 +57,9 @@ const Translator = () => {
   //Submit login form
   const onSubmit = async (data) => {
     if(data.textData!==''){
-      const response = sendInput(data.textData);
+      const Data = `${data.textData} \n Language:${data.targetLang})`
+      const response = sendInput(Data);
+
       setRes(response)
     }else{
       return ;
