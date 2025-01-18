@@ -13,16 +13,17 @@ const Translator = () => {
 
   const fromLanguages = [{ code: "en", name: "English" }]
   const toLanguages = [
-    { code: "es", name: "Spanish" },
-    { code: "fr", name: "French" },
-    { code: "de", name: "German" },
-    { code: "it", name: "Italian" },
-    { code: "pt", name: "Portuguese" },
-    { code: "ru", name: "Russian" },
-    { code: "ja", name: "Japanese" },
-    { code: "ko", name: "Korean" },
-    { code: "zh", name: "Chinese" },
-  ];
+    { code: "hi", name: "Hindi" },
+    { code: "mr", name: "Marathi" },
+    { code: "gu", name: "Gujarati" },
+    { code: "ta", name: "Tamil" },
+    { code: "kn", name: "Kannada" },
+    { code: "te", name: "Telugu" },
+    { code: "bn", name: "Bengali" },
+    { code: "ml", name: "Malayalam" },
+    { code: "pa", name: "Punjabi" },
+    { code: "or", name: "Odia" }
+];
 
   const handleTranslate = () => {
     let langData = inputText.current.value.trim();
@@ -33,6 +34,7 @@ const Translator = () => {
     } else {
       return;
     }
+    setTranslatedText(`${inputText} \n Language:${toLanguages.find(lang => lang.code === targetLanguage)?.name})`)
   };
 
 
@@ -43,7 +45,7 @@ const Translator = () => {
   };
 
   const handleClearText = () => {
-    inputText.current.value = '';
+    inputText.current?.value = '';
     setRes("");
   };
 
