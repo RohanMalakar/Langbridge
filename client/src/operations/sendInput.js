@@ -3,8 +3,9 @@ import axios from "axios"
 
 export default async function sendInput(langData){
   try{
-    const res = axios.post('https//:localhost8080/DEMO_API',langData)
-    console.log(res)
+    const res =await axios.post('http//:localhost:3001/api/v1/langflow/run-flow',langData)
+    console.log("RESPONSE : ",res)
+    return 'HELLO'
   }catch(error){
     console.log('Erroro to send input :' ,error)
   }

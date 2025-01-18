@@ -5,7 +5,6 @@ import { FaGithub } from "react-icons/fa";
 import { RiTwitterXFill } from "react-icons/ri";
 
 const Card = ({member}) => {
-  console.log(member);
   return (
     <StyledWrapper>
       <div className="e-card playing  hover:shadow-2xl hover:scale-[1.01]  shadow-indigo-500/50 cursor-pointer transition-all">
