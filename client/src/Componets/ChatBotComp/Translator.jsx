@@ -1,9 +1,9 @@
 import React, { useRef, useState } from "react";
 import { FaLanguage, FaExchangeAlt, FaCopy } from "react-icons/fa";
 import { IoMdClose } from "react-icons/io";
-import sendInput from "../../operations/sendInput";
 import { MdAddLink } from "react-icons/md";
 import { useForm } from 'react-hook-form';
+import sendTextInput from '../../operations/sendInput.js'
 
 const Translator = () => {
   const [targetLanguage, setTargetLanguage] = useState("es");
@@ -56,13 +56,14 @@ const Translator = () => {
 
   //Submit login form
   const onSubmit = async (data) => {
+    console.log(data);
     if(data.textData!==''){
       const Data = `${data.textData} \n Language:${data.targetLang})`
-      const response = sendInput(Data);
-
+      const response = await sendTextInput(Data);
+      // console.log('res------->',response)
       setRes(response)
-    }else{
-      return ;
+    }else if(data.fileData.length!==0){
+      
     }
   }
     return ( 
@@ -77,7 +78,7 @@ const Translator = () => {
           </div>
 
           {/*----------- Section -2  ----------- */}
-          <div className="bg-white rounded-lg shadow-lg p-6">
+          <div className="bg-white rounded-lg shadow-lg p-3  flex flex-col gap-y-10">
 
 
             {/* form */}
@@ -93,7 +94,7 @@ const Translator = () => {
                 >
                   <option value="">Select language</option>
                   {toLanguages.map((lang) => (
-                    <option key={lang.code} value={lang.code}>
+                    <option key={lang.code} value={lang.name}>
                       {lang.name}
                     </option>
                   ))}
@@ -101,12 +102,12 @@ const Translator = () => {
               </div>
 
               {/* Input from */}
-              <div className="border-2 h-45 p-2 rounded-lg border-gray-800">
+              <div className="border-2 h-full p-2 rounded-lg border-gray-800">
                 <textarea
                   placeholder="Enter text to translate..."
                   name="textData"
 
-                  className="w-full h-30 p-3 focus:ring-0 focus:outline-none"
+                  className="w-full h-60 p-3 focus:ring-0 focus:outline-none"
                   {...register("textData")}
                 />
 
@@ -147,8 +148,8 @@ const Translator = () => {
             {res !== null ?
               <textarea
                 value={res}
-                placeholder=" translate..."
-                className="w-full h-40 p-4 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 resize-none"
+                placeholder="translate..."
+                className="w-full h-[30vh] p-3 border border-gray-300 rounded-lg"
               /> :
               null}
 

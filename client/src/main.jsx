@@ -10,6 +10,7 @@ import { StrictMode } from 'react'
 import Dashboard from "./Pages/Dashboard.jsx";
 import Translator from './Componets/ChatBotComp/Translator.jsx'
 
+
 const router = createBrowserRouter([
   {
     path: '/',
