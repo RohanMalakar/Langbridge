@@ -1,10 +1,13 @@
-import express from "express";
-import multer from "multer";
-import { transcribeAudio } from "../controllers/transcription.controller.js";
+// import express from "express";
+// import multer from "multer";
+// import transcribeFile  from "../controllers/transcription.controller.js";
 
-const router = express.Router();
-const upload = multer({ dest: "uploads/" }); // Temporary storage for uploaded files
+// const router = express.Router();
 
-router.post("/", upload.single("audio"), transcribeAudio);
+// // Multer configuration for file uploads
+// const upload = multer({ dest: "uploads/" });
 
-export default router;
+// // Route for transcribing video/audio
+// router.post("/", upload.single("video"), transcribeFile);
+
+// export default router;

@@ -4,8 +4,10 @@ import { IoMdClose } from "react-icons/io";
 import { MdAddLink } from "react-icons/md";
 import { useForm } from 'react-hook-form';
 import sendTextInput from '../../operations/sendInput.js'
+import VideoUploadComponent from "../../operations/videoUploadComponet.jsx";
 
 const Translator = () => {
+  
   const [targetLanguage, setTargetLanguage] = useState("es");
   const [res, setRes] = useState(null);
   let [inputText,setInputText] = useState("")
@@ -122,6 +124,7 @@ const Translator = () => {
                       {/* Example: PDF Icon (you can replace with any icon library like FontAwesome or Heroicons) */}
                       <MdAddLink className="text-[1.5rem]" />
                     </label>
+                    <VideoUploadComponent/>
 
                     {/* Hidden file input */}
                     <input
@@ -137,7 +140,7 @@ const Translator = () => {
                   <div>
                     <button type="submit" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">Translate</button>
                   </div>
-
+                  
                 </div>
               </div>
 
