@@ -5,7 +5,7 @@ import cors from "cors";
 import path from "path";
 import langflowRoutes from "./routes/LangFlow.route.js";
 import postRouter from "./routes/Posts.route.js";
-import transcriptionRoutes from "./routes/transcriptionRoutes.js";
+//import transcriptionRoutes from "./routes/transcriptionRoutes.js";
 
 const app = express();
 
@@ -21,7 +21,7 @@ app.use(express.json({ limit: "16kb" }));
 app.use(express.urlencoded({ extended: true, limit: "16kb" }));
 app.use("/api/v1/langflow", langflowRoutes); // Mount the Langflow routes
 app.use("/api/v1/posts", postRouter); // Mount the Posts routes
-app.use("/api/transcribe", transcriptionRoutes);
+//app.use("/api/transcribe", transcriptionRoutes);
 
 
 // Serve static assets in production
