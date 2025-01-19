@@ -6,6 +6,7 @@ import { BsChatRightDots } from "react-icons/bs";
 import { RiTeamFill } from "react-icons/ri";
 import { FaGithub } from "react-icons/fa";
 import logo from "../assets/Images/logo-anime.gif"; // Import the logo
+import { MdTranslate } from "react-icons/md";
 
 function Header({ hideChatBot, setHideChatBot }) {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -50,18 +51,18 @@ function Header({ hideChatBot, setHideChatBot }) {
               </span>
             </Link>
           </li>
+          
           <li>
-            <div
-              className="flex items-center gap-2 group cursor-pointer"
-              onClick={handleChatBotHide}
-            >
-              <BsChatRightDots className="text-[1.3rem] text-teal-600 group-hover:text-teal-300" />
+            <Link className="flex items-center gap-2 group" to="/translator">
+              <MdTranslate className="text-[1.5rem] text-teal-600 group-hover:text-teal-300" />
               <span className="text-medium font-semibold group-hover:text-teal-300 relative overflow-hidden">
-                Chat
+                 Translator
                 <span className="absolute left-0 bottom-0 w-full h-[2px] bg-teal-300 transform scale-x-0 group-hover:scale-x-100 transition-all duration-500"></span>
               </span>
-            </div>
+            </Link>
           </li>
+
+
           <li>
             <Link className="flex items-center gap-2 group" to="/ourteam">
               <RiTeamFill className="text-[1.5rem] text-teal-600 group-hover:text-teal-300" />
