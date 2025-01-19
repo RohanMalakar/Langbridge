@@ -4,7 +4,6 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Header from "./Componets/Header.jsx";
 import Footer from "./Componets/Footer.jsx";
-import ChatBox from "./Componets/ChatBotComp/ChatBox.jsx";
 import '../src/App.css'
 
 
@@ -15,8 +14,7 @@ function App() {
 
     return (
         <>
-            <Header  />
-            {/* ChatBox */}
+            <Header hideChatBot={hideChatBot} setHideChatBot={setHideChatBot} />
             <Outlet  />
             <Footer />
         </>

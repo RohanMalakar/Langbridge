@@ -26,7 +26,8 @@
     "react-slick": "^0.30.3",
     "recharts": "^2.15.0",
     "slick-carousel": "^1.8.1",
-    "styled-components": "^6.1.14"
+    "styled-components": "^6.1.14",
+    "typed.js": "^2.1.0"
   },
   "devDependencies": {
     "@eslint/js": "^9.17.0",

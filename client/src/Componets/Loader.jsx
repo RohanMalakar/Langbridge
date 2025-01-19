@@ -3,7 +3,7 @@ import React from 'react'
 
 function Loader() {
   return (
-     <button disabled type="button" className="text-white bg-indigo-600 hover:bg-indigo-700 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px- py-2.5 text-center me-2 inline-flex justify-center items-center">
+     <button disabled type="button" className="text-white bg-teal-600 hover:bg-teal-700 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px- py-2.5 text-center me-2 inline-flex justify-center items-center">
       
       <div class='flex space-x-2 justify-center items-center container pt-1 pr-1'>
         <span class='sr-only'>Loading...</span>
