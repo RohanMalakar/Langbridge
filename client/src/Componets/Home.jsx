@@ -70,7 +70,7 @@ const HomePage = () => {
           {/* Get Started and View Dashboard Buttons */}
           <div className="w-[100%] pl-3">
             <div className="w-[100%] flex flex-wrap md:flex-nowrap justify-start sm:justify-center md:justify-start gap-x-7 px-2">
-              <Link to={"/chat"}>
+              <Link to={"/translator"}>
                 <button
                   className="bg-teal-700 text-gray-300 hover:bg-gray-700  px-3 py-2 md:py-3 font-[600] md:font-bold rounded-md transition duration-300 w-[100%] mt-5 flex items-center gap-2 hover:scale-105"
                 >
@@ -105,27 +105,20 @@ const HomePage = () => {
             </div>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
-            <div className="bg-gray-700 flex flex-col items-center justify-center shadow-md p-6 rounded-md hover:shadow-2xl hover:scale-105 hover:bg-teal-700 transition gap-4 duration-300">
-              <img className="w-48" src={analysis} alt="Real-Time Analysis" />
-              <h4 className="text-xl font-bold mb-4 text-gray-300">Accuracy Analysis</h4>
-              <p className="font-[500] text-gray-300">
-              LangBridge ensures precise translations with advanced algorithms that prioritize context and meaning. Our system constantly learns and adapts, delivering reliable, high-quality results for all your translation needs.
-              </p>
-            </div>
-
+          <div className="flex justify-around gap-6">
+           
             <div className="bg-gray-700 flex flex-col items-center justify-center shadow-md p-6 rounded-md hover:shadow-2xl hover:scale-105 hover:bg-teal-700 transition gap-4 duration-300">
               <img className="w-48 rounded-2xl" src={translator} alt="Real-Time Analysis" />
               <h4 className="text-xl font-bold mb-4 text-gray-300">Quick Translation</h4>
               <p className="font-[500] text-gray-300">
-              Allow users to instantly translate text between English and multiple languages with minimal delay. This feature can be particularly valuable for users in real-time conversations, live chats, or on-the-go scenarios, offering a seamless translation experience across different languages.              </p>
+              Allow users to instantly translate text between English and multiple languages with minimal delay. This feature can be particularly valuable for users</p>
             </div>
 
             <div className="bg-gray-700 flex flex-col items-center justify-center shadow-md p-6 rounded-md hover:shadow-2xl hover:scale-105 hover:bg-teal-700 transition gap-4 duration-300">
               <img className="w-48" src={scalable} alt="Data Scalability" />
               <h4 className="text-xl font-bold mb-4 text-gray-300">Data Scalability</h4>
               <p className="font-[500] text-gray-300">
-              LangBridge is built to handle growth. Whether you're translating a single phrase or large volumes of text, our platform scales seamlessly to meet your needs, ensuring fast and reliable translations every time.
+              LangBridge is built to handle growth. Whether you're translating a single phrase or large volumes of text, our platform scales seamlessly to meet your needs
               </p>
             </div>
 
@@ -133,15 +126,12 @@ const HomePage = () => {
               <img className="w-48" src={interfaceImage} alt="User-Friendly Interfaces" />
               <h4 className="text-xl font-bold mb-4 text-gray-300">Intuitive Interface</h4>
               <p className="font-[500] text-gray-300">
-              LangBridge features a simple, easy-to-use interface, making translation effortless for everyone. Navigate with ease and enjoy a smooth experience, whether you're a first-time user or an expert.
+              LangBridge features a simple, easy-to-use interface, making translation effortless for everyone. Navigate with ease and enjoy a smooth experience
               </p>
             </div>
 
-            
-
-
-
           </div>
+
         </div>
       </section>
 

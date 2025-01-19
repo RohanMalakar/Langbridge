@@ -1,14 +1,16 @@
 import axios from "axios"
 
 // Send text data
-export default async function sendTextInput(langData) {
+export default async function sendTextInput(langData,setFetching) {
   console.log("langData", langData)
   const object = {
     inputValue: langData,
   }
   try {
+    setFetching(()=>true)
     const res = await axios.post('http://localhost:3003/api/v1/langflow/run-flow', object)
     // console.log("RESPONSE : ",res)
+    setFetching(()=>false)
     return res.data.output;
   } catch (error) {
     console.log('Erroro to send input :', error)
@@ -28,7 +30,6 @@ export const sendAudioFile = async(audioFile) =>{
         'Content-Type': 'multipart/form-data', // Ensure correct content type
       },
     });
-
     // Log or return the response from the backend
     console.log('Response Audio:', response.data);
     return response.data;
