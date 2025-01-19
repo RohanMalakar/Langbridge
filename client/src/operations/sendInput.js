@@ -8,7 +8,7 @@ export default async function sendTextInput(langData,setFetching) {
   }
   try {
     setFetching(()=>true)
-    const res = await axios.post('http://localhost:3003/api/v1/langflow/run-flow', object)
+    const res = await axios.post('http://localhost:3001/api/v1/langflow/run-flow', object)
     // console.log("RESPONSE : ",res)
     setFetching(()=>false)
     return res.data.output;
